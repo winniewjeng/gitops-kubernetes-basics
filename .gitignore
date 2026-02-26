@@ -1,3 +1,2 @@
-learnings/
-!learnings/*.md
+*.txt
 .venv
