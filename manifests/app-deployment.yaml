@@ -1,0 +1,22 @@
+# manifests/app-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: myapp:1.0
+          # Inject ConfigMap as environment variables [!!! important !!!]
+          envFrom:
+            - configMapRef:
+                name: app-config # must have matching name with the ConfigMap defined in app-config.yaml [!!! important !!!]

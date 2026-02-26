@@ -1,0 +1,21 @@
+apiVersion: v1 # K8s API version for Service resources
+kind: Service # This is a Service resource (provides stable network access to pods)
+
+metadata: # Metadata about the Service itself
+  name: nginx-service # Name of the Service (used for DNS: nginx-service.default.svc.cluster.local)
+
+spec: # Specification for how the Service should work
+  selector:
+    app: nginx
+    # SELECTOR: route traffic to pods with label app=nginx
+    # This must match the labels in nginx-deployment.yaml [!!! important !!!]
+    # The Service finds pods using this "sticky note" label
+
+  ports:
+    - port: 80 # Port the Service listens on (external/internal requests hit this port)
+      targetPort: 80 # Port on the pod/container to forward traffic to (nginx listens on 80)
+      # Traffic flow: Service:80 → Pod:80
+
+  type: NodePort # Service type: exposes on a random port (30000-32767) on each node
+  # Makes the Service accessible from outside the cluster
+  # Use "minikube service nginx-service --url" to get the access URL
