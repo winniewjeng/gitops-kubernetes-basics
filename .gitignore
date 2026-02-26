@@ -1,2 +1,3 @@
 *.txt
 .venv
+.DS_Store

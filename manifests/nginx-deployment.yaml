@@ -1,0 +1,38 @@
+apiVersion: apps/v1 # K8s API version for Deployments
+
+kind: Deployment # This is a Deployment resource
+
+metadata: # Metadata about the Deployment itself
+  name: nginx-app # Name of the Deployment
+  labels:
+    app: nginx # Label: app=nginx (tags the Deployment)
+
+spec: # Specification for the Deployment
+  replicas: 2 # Run 2 copies of this pod
+
+  selector: # Tells Deployment: "Find pods with these labels and manage them"; creates link between Deployment and pods
+    matchLabels:
+      app:
+        nginx # Manage pods where label app=nginx
+        # This MUST match the pod's labels below
+
+  template: # Template for creating pods
+    metadata:
+      labels: # Tags each pod created from this template with these labels
+        app:
+          nginx # Every pod gets label app=nginx
+          # Required so selector can find them
+
+    spec: # Actual pod/container config
+      containers:
+        - name: nginx # Container name (for reference)
+          image: nginx:1.25 # Container image to run
+          ports:
+            - containerPort: 80 # Port the app listens on (80 = HTTP)
+
+
+### Why the label must appear in both the Deployment and pod template sections?
+### Analogy: Think of the Deployment as a manager who wants to oversee a team of workers (pods). The manager uses sticky notes (labels) to tag the workers with "app=nginx". The manager then looks for all workers with that sticky note (selector) to ensure they are doing their job. If a worker is missing or not working, the manager will create a new one with the same sticky note to maintain the team size.
+# LABEL: what labels are (sticky notes that tag resources)
+# SELECTOR: how the selector searches for those labels
+# ANALOGY: the sticky note analogy embedded right where it's relevant
