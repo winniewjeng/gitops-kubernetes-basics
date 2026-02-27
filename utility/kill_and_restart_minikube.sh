@@ -1,11 +1,13 @@
+# "Updating the running docker container" hang usually means Docker daemon communication issue or corrupted Minikube state. Fresh start should fix it
+
 # check minikube status
 minikube status
 
 # stop minikube
 minikube stop
 
-# If minikube stop hangs after 30 seconds, press Ctrl+C and force delete
-minikube delete
+# If minikube stop hangs after 30 seconds, press Ctrl+C and then force delete
+minikube delete --purge
 
 # Alternative (if delete is too slow), kill Docker containers directly
 docker ps -a | grep minikube
