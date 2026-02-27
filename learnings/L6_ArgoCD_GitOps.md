@@ -27,11 +27,11 @@ kubectl get pods -n argocd   # Wait until all pods are Running
 ### What gets installed (5-6 pods):
 
 | Pod                             | Purpose                                 |
-| ------------------------------- | --------------------------------------- |
+| ------------------------------- | --------------------------------------- | --- |
 | `argocd-server`                 | The UI dashboard (localhost:8080)       |
 | `argocd-repo-server`            | Clones Git repos + monitors for changes |
 | `argocd-application-controller` | Reconciles cluster state with Git       |
-| `argocd-dex-server`             | Handles authentication                  |
+| `argocd-dex-server`             | Handles authentication                  | `   |
 | `argocd-redis`                  | Caches data for performance             |
 
 ---
@@ -239,6 +239,15 @@ kubectl get pods             # ArgoCD deployed your pods!
 ```
 
 In the ArgoCD UI, you'll see a beautiful dependency graph of your resources.
+
+![ArgoCD UI Dashboard showing nginx-app deployment](img/argocd.png)
+
+The UI shows:
+
+- **App Health:** Healthy (green check)
+- **Sync Status:** Synced (auto-sync enabled)
+- **Resource Graph:** Visual dependency tree showing the application, service, deployment, ReplicaSet, and pods
+- **Last Sync:** Timestamp and commit author/message
 
 ---
 
