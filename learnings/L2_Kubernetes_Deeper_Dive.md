@@ -14,7 +14,7 @@ Move from imperative commands to declarative YAML files — the real way K8s is 
 
 ## Step 1: Write Your First YAML Manifest
 
-Create a file: `~/Documents/LearnK8s/manifests/nginx-deployment.yaml`
+Create a file: `~/Documents/learnK8s/manifests/nginx-deployment.yaml`
 
 Apply it:
 
@@ -28,7 +28,7 @@ $ kubectl get pods --show-labels
 
 A service provides a stable IP address, DNS name (nginx-service), and traffic routing to the pods.
 
-Create: `~/Documents/LearnK8s/manifests/nginx-service.yaml`
+Create: `~/Documents/learnK8s/manifests/nginx-service.yaml`
 
 ```bash
 $ kubectl apply -f manifests/nginx-service.yaml
@@ -82,7 +82,7 @@ $ kubectl get configmap app-config -o yaml
 
 #### Approach B: Declarative (best practice for production)
 
-Create: `~/Documents/LearnK8s/manifests/app-config.yaml`
+Create: `~/Documents/learnK8s/manifests/app-config.yaml`
 
 ```bash
 $ kubectl apply -f manifests/app-config.yaml
@@ -107,7 +107,7 @@ $ kubectl get secret db-creds -o jsonpath='{.data.password}' | base64 --decode  
 
 #### Approach B: Declarative (best practice)
 
-Create: `~/Documents/LearnK8s/manifests/db-secret.yaml`
+Create: `~/Documents/learnK8s/manifests/db-secret.yaml`
 
 ```bash
 $ kubectl apply -f manifests/db-secret.yaml
