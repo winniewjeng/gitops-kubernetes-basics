@@ -8,6 +8,7 @@ minikube stop
 
 # If minikube stop hangs after 30 seconds, press Ctrl+C and then force delete
 minikube delete --purge
+rm -rf ~/.minikube  # equivalence of docker system prune -a --volumes, for minikube-related data
 
 # Alternative (if delete is too slow), kill Docker containers directly
 docker ps -a | grep minikube
