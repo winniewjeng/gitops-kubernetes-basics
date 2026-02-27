@@ -1,0 +1,56 @@
+replicaCount: 2 # Number of nginx pods to run (good balance for learning)
+
+image:
+  registry: docker.io # Image registry; keep default for learning
+  repository: bitnami/nginx # Chart expects Bitnami's nginx image
+  tag: 1.25.4-debian-12-r2 # Pinned tag for repeatable installs
+  pullPolicy: IfNotPresent # Avoid pulling if already cached locally
+
+service:
+  type: NodePort # Easiest to access on Minikube without Ingress
+  ports:
+    http: 80 # Cluster-internal service port
+  nodePorts:
+    http: 30080 # Fixed NodePort for predictable local access
+
+ingress:
+  enabled: false # Keep off for now; we'll enable when you start Ingress lessons
+  hostname: nginx.local # Placeholder for later local testing
+  path: / # Root path routes to nginx service
+  pathType: Prefix # Prefix matches all paths under /
+
+resources:
+  requests:
+    cpu: 100m # Scheduler baseline (0.1 CPU)
+    memory: 128Mi # Scheduler baseline memory
+  limits:
+    cpu: 300m # Allow short bursts without starving the node
+    memory: 256Mi # Cap memory to avoid OOM on small clusters
+
+autoscaling:
+  enabled: false # Off for now; use fixed replicaCount during learning
+  minReplicas: 2 # If enabled later, minimum pod count
+  maxReplicas: 5 # If enabled later, maximum pod count
+  targetCPU: 70 # Target average CPU utilization percent
+
+podLabels:
+  app: my-nginx # Simple label for grouping and filtering
+  tier: web # Example tier label often used in real apps
+
+extraEnvVars:
+  - name: NGINX_ENTRYPOINT_QUIET_LOGS # Reduce startup noise in logs
+    value: "1"
+
+livenessProbe:
+  enabled: true # Restarts pod if nginx becomes unhealthy
+  initialDelaySeconds: 15 # Give nginx time to start
+  periodSeconds: 10 # Check every 10 seconds
+  timeoutSeconds: 2 # Wait up to 2 seconds for a response
+  failureThreshold: 3 # Restart after 3 consecutive failures
+
+readinessProbe:
+  enabled: true # Only send traffic when nginx is ready
+  initialDelaySeconds: 5 # Start checks soon after container starts
+  periodSeconds: 5 # Check frequently for fast readiness
+  timeoutSeconds: 2 # Wait up to 2 seconds for a response
+  failureThreshold: 3 # Mark not-ready after 3 failures
