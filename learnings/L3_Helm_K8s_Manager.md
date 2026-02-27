@@ -83,10 +83,10 @@ $ helm upgrade my-nginx bitnami/nginx --set replicaCount=3
 $ kubectl get pods       # Now 3 replicas
 ```
 
-Or use a file — create `~/Documents/LearnK8s/helm/my-nginx-values.yaml`
+Or use a file — create `~/Documents/LearnK8s/helm/values/my-nginx-values.yaml`
 
 ```bash
-$ helm upgrade my-nginx bitnami/nginx -f helm/my-nginx-values.yaml
+$ helm upgrade my-nginx bitnami/nginx -f helm/values/my-nginx-values.yaml
 ```
 
 **In short:** loads the chart (`bitnami/nginx`) → reads/overrides values from `values.yaml` → renders template (the various YAML files) → applies changes to existing revision → stores a new version of the release in the cluster (that can be rolled back if needed)
@@ -146,7 +146,7 @@ Explore the generated files. You can then customize:
 Renders the chart templates locally and prints the final Kubernetes YAML to the terminal:
 
 ```bash
-$ helm template my-release ./my-first-chart
+$ helm template my-release ./helm/my-first-chart
 ```
 
 Even though `helm template` doesn't actually install anything, it still needs a release name (e.g. `my-release`) because templates use `{{ .Release.Name }}` in patterns like `name: {{ .Release.Name }}-deployment` in `templates/deployment.yaml`.
@@ -154,7 +154,7 @@ Even though `helm template` doesn't actually install anything, it still needs a 
 ### Install Your Chart
 
 ```bash
-$ helm install my-release ./my-first-chart
+$ helm install my-release ./helm/my-first-chart
 $ kubectl get all
 $ minikube service my-release-my-first-chart --url  # finds the service name, creates a tunnel from local machine to the minikube cluster, then returns the URL to access the service
 ```
@@ -164,7 +164,7 @@ $ minikube service my-release-my-first-chart --url  # finds the service name, cr
 Modify `values.yaml` (change `replicaCount` to 3), then upgrade:
 
 ```bash
-$ helm upgrade my-release ./my-first-chart
+$ helm upgrade my-release ./helm/my-first-chart
 ```
 
 ### Clean Up
