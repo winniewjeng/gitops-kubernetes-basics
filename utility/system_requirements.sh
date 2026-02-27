@@ -31,7 +31,7 @@ minikube start --driver=docker --memory=4096 --cpus=2
 
 # For Day 6 (ArgoCD)
 minikube delete  # Clean slate
-minikube start --driver=docker --memory=4096 --cpus=2
+minikube start --driver=docker --memory=4096 --cpus=3
 
 ##### Resource management tips:
 # Stop when not learning (frees RAM immediately)

@@ -15,6 +15,7 @@ docker rm -f <container-id>    # Force remove the minikube container
 
 # restart
 minikube start --driver=docker --memory=3072 --cpus=2
+# minikube start --driver=docker --memory=4096 --cpus=3
 
 # Once restarted
 kubectl get nodes              # Verify cluster is ready
