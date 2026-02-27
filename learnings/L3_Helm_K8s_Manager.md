@@ -83,7 +83,7 @@ $ helm upgrade my-nginx bitnami/nginx --set replicaCount=3
 $ kubectl get pods       # Now 3 replicas
 ```
 
-Or use a file — create `~/Documents/LearnK8s/helm/values/my-nginx-values.yaml`
+Or use a file — create `~/Documents/learnK8s/helm/values/my-nginx-values.yaml`
 
 ```bash
 $ helm upgrade my-nginx bitnami/nginx -f helm/values/my-nginx-values.yaml
@@ -109,7 +109,7 @@ $ kubectl get pods       # Cleaned up!
 Instead of writing all these files from scratch, Helm gives you a working example chart that uses best practices, has proper Go templating (`{{ .Values.xxx }}`), includes common Kubernetes resources, and is ready to customize for your app.
 
 ```bash
-$ cd ~/Documents/LearnK8s
+$ cd ~/Documents/learnK8s
 $ helm create my-first-chart
 ```
 
