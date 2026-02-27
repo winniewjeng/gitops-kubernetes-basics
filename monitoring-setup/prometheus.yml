@@ -1,0 +1,37 @@
+# Global configuration for Prometheus server
+# These settings apply to all scrape jobs unless overridden
+global:
+  # scrape_interval: How often Prometheus scrapes metrics from targets
+  # Default is 1m, but 15s provides more granular data for monitoring
+  scrape_interval: 15s
+
+  # evaluation_interval: How often Prometheus evaluates alerting rules
+  # Keeping this aligned with scrape_interval ensures timely alert detection
+  evaluation_interval: 15s
+
+# scrape_configs: Defines which targets Prometheus should scrape and how
+# Each job defines a collection of targets and parameters for scraping them
+scrape_configs:
+  # Job 1: Monitor Prometheus itself (self-monitoring)
+  # This allows you to track Prometheus' own performance and health
+  - job_name: "prometheus"
+    # static_configs: Manually defined list of targets (vs service discovery)
+    static_configs:
+      # targets: Array of host:port endpoints to scrape metrics from
+      # Prometheus exposes its own metrics at /metrics on port 9090
+      # In other words, Prometheus scrapes itself for metrics every 15 seconds
+      - targets: ["localhost:9090"]
+
+  # Job 2: Monitor a simple custom application
+  - job_name: "simple_app"
+    static_configs:
+      - targets: ["host.docker.internal:8000"]
+
+  # Job 3: Monitor Docker daemon metrics
+  # Docker exposes metrics on port 9323 when metrics are enabled
+  # This provides insights into container resource usage, image pulls, etc.
+  - job_name: "docker"
+    static_configs:
+      # Docker daemon's metrics endpoint (requires Docker metrics to be enabled)
+      # To enable: Add "metrics-addr": "0.0.0.0:9323" to Docker daemon.json
+      - targets: ["host.docker.internal:9323"]
