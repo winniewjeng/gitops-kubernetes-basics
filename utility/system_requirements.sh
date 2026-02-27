@@ -29,6 +29,10 @@ minikube start --driver=docker --memory=3072 --cpus=2
 minikube delete  # Clean slate
 minikube start --driver=docker --memory=4096 --cpus=2
 
+# For Day 6 (ArgoCD)
+minikube delete  # Clean slate
+minikube start --driver=docker --memory=4096 --cpus=2
+
 ##### Resource management tips:
 # Stop when not learning (frees RAM immediately)
 minikube stop
@@ -38,4 +42,4 @@ minikube delete && minikube start --memory=3072
 
 # Check Minikube's actual usage
 docker stats  # Shows all container resource usage
-# Start with Days 1-3 using --memory=3072. You'll learn 80% of the concepts without resource stress. [ Follow-up: Want me to create a modified Day 4-5 that's lighter weight? ]
+# Start with Days 1-3 using --memory=3072. You'll learn 80% of the concepts without resource stress.

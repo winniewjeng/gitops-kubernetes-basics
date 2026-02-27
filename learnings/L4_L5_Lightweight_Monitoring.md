@@ -131,21 +131,21 @@ Wait ~10 seconds, then open: http://localhost:9090
 
 #### Your `prometheus.yml` Configuration
 
-| Setting | Value |
-|---------|-------|
-| `global.scrape_interval` | 15s (scrape every 15 seconds) |
-| Job `prometheus` | scrapes `localhost:9090/metrics` (itself) |
-| Job `simple_app` | scrapes `host.docker.internal:8000/metrics` (your app) |
-| Job `docker` | scrapes `host.docker.internal:9323/metrics` (Docker daemon) |
+| Setting                  | Value                                                       |
+| ------------------------ | ----------------------------------------------------------- |
+| `global.scrape_interval` | 15s (scrape every 15 seconds)                               |
+| Job `prometheus`         | scrapes `localhost:9090/metrics` (itself)                   |
+| Job `simple_app`         | scrapes `host.docker.internal:8000/metrics` (your app)      |
+| Job `docker`             | scrapes `host.docker.internal:9323/metrics` (Docker daemon) |
 
 #### Metric Types
 
-| Type | Behavior | Example |
-|------|----------|---------|
-| **Counter** | Only goes up | `http_requests_total`, `errors_total` |
-| **Gauge** | Goes up and down | `memory_bytes`, `temperature` |
-| **Histogram** | Tracks distribution | `request_latency_seconds_bucket` |
-| **Summary** | Like histogram but with percentiles | `request_duration_quantile` |
+| Type          | Behavior                            | Example                               |
+| ------------- | ----------------------------------- | ------------------------------------- |
+| **Counter**   | Only goes up                        | `http_requests_total`, `errors_total` |
+| **Gauge**     | Goes up and down                    | `memory_bytes`, `temperature`         |
+| **Histogram** | Tracks distribution                 | `request_latency_seconds_bucket`      |
+| **Summary**   | Like histogram but with percentiles | `request_duration_quantile`           |
 
 #### PromQL Basics
 
@@ -186,12 +186,12 @@ Metrics server running on http://localhost:8000/metrics
 
 #### Metrics Provided
 
-| Metric | Type | Description |
-|--------|------|-------------|
-| `app_requests_total` | Counter | Total HTTP requests |
-| `app_request_latency_seconds_bucket` | Histogram | Request latency |
-| `app_active_users` | Gauge | Current active users (0-100) |
-| `app_temperature_celsius` | Gauge | Simulated temperature (15-35°C) |
+| Metric                               | Type      | Description                     |
+| ------------------------------------ | --------- | ------------------------------- |
+| `app_requests_total`                 | Counter   | Total HTTP requests             |
+| `app_request_latency_seconds_bucket` | Histogram | Request latency                 |
+| `app_active_users`                   | Gauge     | Current active users (0-100)    |
+| `app_temperature_celsius`            | Gauge     | Simulated temperature (15-35°C) |
 
 Access the metrics directly:
 
@@ -227,13 +227,13 @@ Wait ~10 seconds, then check http://localhost:9090/targets — you should see `s
 
 Go to http://localhost:9090/graph and try these queries:
 
-| Query | What It Shows |
-|-------|--------------|
-| `app_requests_total` | Total requests counter (only increases) |
-| `rate(app_requests_total[5m])` | Requests per second (rate over 5 min) |
-| `app_request_latency_seconds_bucket` | Latency distribution |
-| `app_active_users` | Current active users (0-100) |
-| `app_temperature_celsius` | Current temperature (15-35°C) |
+| Query                                | What It Shows                           |
+| ------------------------------------ | --------------------------------------- |
+| `app_requests_total`                 | Total requests counter (only increases) |
+| `rate(app_requests_total[5m])`       | Requests per second (rate over 5 min)   |
+| `app_request_latency_seconds_bucket` | Latency distribution                    |
+| `app_active_users`                   | Current active users (0-100)            |
+| `app_temperature_celsius`            | Current temperature (15-35°C)           |
 
 **Try this:**
 
@@ -300,8 +300,8 @@ Open http://localhost:3000 in your browser.
 
 **Login:**
 
-| Field | Value |
-|-------|-------|
+| Field    | Value   |
+| -------- | ------- |
 | Username | `admin` |
 | Password | `admin` |
 
@@ -387,14 +387,14 @@ Now the gauge color changes based on temperature!
 
 ### Step 7: Understand Grafana Concepts
 
-| Concept | Description |
-|---------|-------------|
-| **Dashboards** | A collection of panels showing related metrics |
-| **Panels** | Individual visualizations (graph, gauge, stat, bar, etc.) |
-| **Queries** | PromQL expressions that fetch data from Prometheus |
+| Concept          | Description                                                   |
+| ---------------- | ------------------------------------------------------------- |
+| **Dashboards**   | A collection of panels showing related metrics                |
+| **Panels**       | Individual visualizations (graph, gauge, stat, bar, etc.)     |
+| **Queries**      | PromQL expressions that fetch data from Prometheus            |
 | **Data Sources** | Where panels get data (Prometheus, Loki, Elasticsearch, etc.) |
-| **Variables** | Parameterize dashboards (e.g., `${job}` selector) |
-| **Alerts** | Trigger notifications based on metric thresholds |
+| **Variables**    | Parameterize dashboards (e.g., `${job}` selector)             |
+| **Alerts**       | Trigger notifications based on metric thresholds              |
 
 ### Step 8: Experiment with Visualizations
 
@@ -408,12 +408,12 @@ Now the gauge color changes based on temperature!
 
 **Best practices:**
 
-| Visualization | Best For |
-|--------------|----------|
-| Time series | Trends (requests, latency, temperature over time) |
-| Stat / Gauge | Current snapshots (active users, CPU%, memory%) |
-| Table | Lists/matrices (pod details, error logs) |
-| Pie / Donut | Proportions (requests by endpoint, errors by type) |
+| Visualization | Best For                                           |
+| ------------- | -------------------------------------------------- |
+| Time series   | Trends (requests, latency, temperature over time)  |
+| Stat / Gauge  | Current snapshots (active users, CPU%, memory%)    |
+| Table         | Lists/matrices (pod details, error logs)           |
+| Pie / Donut   | Proportions (requests by endpoint, errors by type) |
 
 ### Day 5 Checkpoint
 
@@ -452,16 +452,16 @@ Stop `simple_app.py` with `Ctrl+C` in the terminal where it's running.
 
 ## Key Differences from kube-prometheus-stack
 
-| | Lightweight (Docker) | kube-prometheus-stack |
-|---|---|---|
-| **RAM usage** | ~1.5 GB | ~3 GB |
-| **Startup time** | < 30 seconds | ~5 minutes |
-| **Dashboard building** | From scratch (you learn more) | Pre-built |
-| **PromQL practice** | Hands-on | Optional |
-| **K8s cluster monitoring** | ✗ | ✓ |
-| **Prometheus Operator** | ✗ | ✓ |
-| **Alert Manager** | ✗ | ✓ |
-| **Control** | Full | Managed |
+|                            | Lightweight (Docker)          | kube-prometheus-stack |
+| -------------------------- | ----------------------------- | --------------------- |
+| **RAM usage**              | ~1.5 GB                       | ~3 GB                 |
+| **Startup time**           | < 30 seconds                  | ~5 minutes            |
+| **Dashboard building**     | From scratch (you learn more) | Pre-built             |
+| **PromQL practice**        | Hands-on                      | Optional              |
+| **K8s cluster monitoring** | ✗                             | ✓                     |
+| **Prometheus Operator**    | ✗                             | ✓                     |
+| **Alert Manager**          | ✗                             | ✓                     |
+| **Control**                | Full                          | Managed               |
 
 **Trade-off:** You learn the fundamentals deeply, then can add kube-prometheus later when you have more RAM or on a cloud cluster.
 
