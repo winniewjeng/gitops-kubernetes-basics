@@ -1,6 +1,6 @@
 # Helm Directory Organization
 
-This directory contains all Helm-related files for the LearnK8s project, organized by purpose.
+This directory contains all Helm-related files for the learnK8s project, organized by purpose.
 
 ## Directory Structure
 
