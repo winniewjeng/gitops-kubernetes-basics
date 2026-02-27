@@ -175,8 +175,8 @@ $ helm uninstall my-release
 
 ## Day 3 Checkpoint
 
-- [ ] Helm installed
-- [ ] Added bitnami repo, searched & installed a chart
-- [ ] Customized a release with --set and values file
-- [ ] Created your own Helm chart from scratch
-- [ ] Understood Chart.yaml, values.yaml, and templates/
+- [✓] Helm installed
+- [✓] Added bitnami repo, searched & installed a chart
+- [✓] Customized a release with --set and values file
+- [✓] Created your own Helm chart from scratch
+- [✓] Understood Chart.yaml, values.yaml, and templates/
